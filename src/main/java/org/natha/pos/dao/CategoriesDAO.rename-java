@@ -1,0 +1,62 @@
+package org.natha.pos.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.natha.pos.entity.Categories;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.concretepage.entity.Article;
+
+//import com.concretepage.dao.IArticleDAO;
+//import com.concretepage.entity.Article;
+
+@Transactional
+@Repository
+public class CategoriesDAO implements ICategoriesDAO{
+	@PersistenceContext	
+	private EntityManager entityManager;	
+	
+	@Override
+	public List<Categories> getAllCategories() {
+		String hql = "FROM Categories as cat ORDER BY cat.id";
+		return (List<Categories>) entityManager.createQuery(hql).getResultList();
+	}
+
+	@Override
+	public Categories getCategoriesById(String id) {
+		return entityManager.find(Categories.class, id);
+	}
+
+	@Override
+	public void addCategories(Categories categories) {
+		entityManager.persist(categories);
+	}
+
+	@Override
+	public void updateCategories(Categories categories) {
+		Categories cat = getCategoriesById(categories.getId());
+		cat.setCatshowname(categories.getCatshowname());
+		cat.setName(categories.getName());
+		cat.setParentid(categories.getParentid());
+		cat.setTexttip(categories.getTexttip());
+		entityManager.flush();		
+	}
+
+	@Override
+	public void deleteCategories(String id) {
+		entityManager.remove(getCategoriesById(id));
+	}
+
+	@Override
+	public boolean categoriesExists(String id) {
+		String hql = "FROM Categories as cat WHERE cat.id = ?";
+		int count = entityManager.createQuery(hql).setParameter(1, id)
+		              .getResultList().size();
+		return count > 0 ? true : false;
+	}
+	
+}

@@ -1,0 +1,15 @@
+package org.natha.pos.dao;
+
+import java.util.List;
+
+import org.natha.pos.entity.Categories;
+
+public interface ICategoriesDAO {
+    List<Categories> getAllCategories();
+    Categories getCategoriesById(String Id);
+    void addCategories(Categories categories);
+    void updateCategories(Categories categories);
+    void deleteCategories(String Id);
+//    boolean categoriesExists(String title, String category);
+    boolean categoriesExists(String Id);
+}

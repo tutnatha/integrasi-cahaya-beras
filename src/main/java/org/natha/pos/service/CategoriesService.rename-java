@@ -1,0 +1,50 @@
+package org.natha.pos.service;
+
+import java.util.List;
+
+import org.natha.pos.dao.ICategoriesDAO;
+import org.natha.pos.entity.Categories;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.concretepage.dao.IArticleDAO;
+import com.concretepage.entity.Article;
+
+@Service
+public class CategoriesService implements ICategoriesService{
+	@Autowired
+	private ICategoriesDAO categoriesDAO;
+	
+	@Override
+	public List<Categories> getAllCategories() {
+		return categoriesDAO.getAllCategories();
+	}
+
+	@Override
+	public Categories getCategoriesById(String id) {
+		Categories obj = categoriesDAO.getCategoriesById(id);
+		return obj;
+	}
+
+	@Override
+	public boolean addCategories(Categories cat) {
+		if (categoriesDAO.categoriesExists(cat.getId())) {
+	    	   return false;
+	       } else {
+	    	   categoriesDAO.addCategories(cat);
+	    	   return true;
+	       }
+	}
+
+	@Override
+	public void updateCategories(Categories cat) {
+		categoriesDAO.updateCategories(cat);
+	}
+
+	@Override
+	public void deleteCategories(String id) {
+		categoriesDAO.deleteCategories(id);		
+	}
+
+	
+}

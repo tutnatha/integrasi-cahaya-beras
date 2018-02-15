@@ -1,0 +1,77 @@
+package org.natha.pos.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="categories")
+public class Categories implements Serializable{
+/*	
+	id character varying NOT NULL,
+  	name character varying NOT NULL,
+  	parentid character varying,
+  	image bytea,
+  	texttip character varying,
+  	catshowname boolean NOT NULL DEFAULT true,
+  	CONSTRAINT categories_pkey PRIMARY KEY (id),
+  	CONSTRAINT categories_fk_1 FOREIGN KEY (parentid)
+*/	
+	@Id
+	@Column(name="id")
+    private String id;
+	@Column(name="name")
+	private String name;
+	@Column(name="parentid")
+	private String parentid;
+//	image bytea
+	@Column(name="texttip")
+	private String texttip;
+	@Column(name="catshowname")
+	private Boolean catshowname;
+	
+	public Categories(String id, String name, String parentid, String texttip, Boolean catshowname) {
+		super();
+		id = id;
+		name = name;
+		parentid = parentid;
+		texttip = texttip;
+		catshowname = catshowname;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		name = name;
+	}
+	public String getParentid() {
+		return parentid;
+	}
+	public void setParentid(String parentid) {
+		parentid = parentid;
+	}
+	public String getTexttip() {
+		return texttip;
+	}
+	public void setTexttip(String texttip) {
+		texttip = texttip;
+	}
+	public Boolean getCatshowname() {
+		return catshowname;
+	}
+	public void setCatshowname(Boolean catshowname) {
+		catshowname = catshowname;
+	}
+}

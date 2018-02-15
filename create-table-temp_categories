@@ -1,0 +1,10 @@
+﻿create table tmp_categories(
+seq_id integer NOT NULL,
+id character varying NOT NULL,
+  name character varying NOT NULL,
+  parentid character varying,
+  image bytea,
+  texttip character varying,
+  catshowname boolean NOT NULL DEFAULT true,
+  CONSTRAINT tmp_categories_pkey PRIMARY KEY (seq_id));
+  

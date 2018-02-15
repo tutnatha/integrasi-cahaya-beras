@@ -1,0 +1,20 @@
+package org.natha.pos.service;
+
+import java.util.List;
+
+import org.natha.pos.entity.Categories;
+import org.springframework.security.access.annotation.Secured;
+
+public interface ICategoriesService {
+	 @Secured ({"ROLE_ADMIN", "ROLE_USER"})
+     List<Categories> getAllCategories();
+	 @Secured ({"ROLE_ADMIN", "ROLE_USER"})
+	 Categories getCategoriesById(String id);
+	 @Secured ({"ROLE_ADMIN"})
+     boolean addCategories(Categories cat);
+	 @Secured ({"ROLE_ADMIN"})
+     void updateCategories(Categories cat);
+	 @Secured ({"ROLE_ADMIN"})
+     void deleteCategories(String id);
+
+}
